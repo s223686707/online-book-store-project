@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                // Checkout code from GitHub repository
+                git branch: 'main', url: 'https://github.com/s223686707/online-book-store-project.git'
+                
+                // Build the code using Maven
+                sh 'mvn clean package'
+                
+                // Archive the build artifact (e.g., JAR file)
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            }
+        }
+
+    }
+    
+}
